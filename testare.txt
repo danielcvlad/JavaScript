@@ -1,0 +1,254 @@
+Private Sub CommandButton1_Click()
+    
+   
+    lastRow = Worksheets("Calculator Bilant").Range("A" & Rows.Count).End(xlUp).Row
+   
+    lastRow2 = Worksheets("Working Table Balanta").Range("A" & Rows.Count).End(xlUp).Row
+    
+    Dim sumVar As Double
+    Dim semn As String
+    Dim conturi() As String
+    ReDim Preserve conturi(0 To 1)
+    Dim valori() As String
+    ReDim Preserve valori(0 To 1)
+    
+
+    
+    Do
+        sumVar = 0
+        
+        currentList = Worksheets("Testeaza Formula").Range("D2").Value
+        
+        Dim SplitArray() As String
+        
+        
+        currentList = Replace(currentList, "-", "+-")
+        
+        If InStr(currentList, "+") > 0 Then
+           
+            SplitArray = Split(currentList, "+")
+           
+        ElseIf IsEmpty(currentList) Or currentList = "" Then
+    
+            Exit Do
+           
+        Else
+            
+            ReDim SplitArray(0) As String
+           
+            SplitArray(0) = currentList
+        End If
+        
+        arrayLength2 = UBound(SplitArray)
+       
+        For j = 0 To arrayLength2
+       
+            currentAccount = SplitArray(j)
+          
+            Worksheets("Working Table Balanta").Activate
+           
+            For k = 2 To lastRow2
+               If Not IsNumeric(currentAccount) Then
+                    Debug.Print (currentAccount)
+                    
+                    If currentAccount = "" Then
+                        sumVar = sumVar
+                    Else:
+                        If InStr(currentList, "*") = 0 Then
+                            If InStr(currentList, "D") > 0 Then
+                                Debug.Print (CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value))
+                                
+                                sintetic = Split(currentList, "D")
+                                If InStr(sintetic(0), "-") > 0 Then
+                                    account = Split(sintetic(0), "-")
+                                    If CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(account(1)) Then
+                                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("M" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = currentList
+                                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("M" & k).Value
+                                    End If
+                                    
+                                ElseIf CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(sintetic(0)) Then
+                                    Debug.Print (Worksheets("Working Table Balanta").Range("A" & k).Value)
+                                    sumVar = sumVar + CDbl(Worksheets("Working Table Balanta").Range("M" & k).Value)
+                                    ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                    ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                    conturi(UBound(conturi)) = currentList
+                                    valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("M" & k).Value
+                                End If
+                            
+                                
+                            ElseIf InStr(currentList, "C") > 0 Then
+                                sintetic = Split(currentList, "C")
+                                
+                                If InStr(sintetic(0), "-") > 0 Then
+                                    account = Split(sintetic(0), "-")
+                                    If CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(account(1)) Then
+                                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("N" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = currentList
+                                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("N" & k).Value
+                                    End If
+                             
+                    
+                                ElseIf CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(sintetic(0)) Then
+                    
+                                    sumVar = sumVar + Worksheets("Working Table Balanta").Range("N" & k).Value
+                                    ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                    ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                    conturi(UBound(conturi)) = currentList
+                                    valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("N" & k).Value
+                                End If
+                            
+                            End If
+                        
+                        Else:
+                                                         
+                            
+                            If InStr(currentAccount, "D") > 0 Then
+                                Debug.Print (CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value))
+                                
+                                account = Split(currentAccount, "*")
+                                                                
+                                wildCard = account(0) & "?"
+                                If InStr(account(0), "-") > 0 Then
+                                    accountMinus = Split(currentAccount, "-")
+                                    wildCard = accountMinus(1) & "?"
+                                    semn = "minus"
+                                Else:
+                                    semn = "plus"
+                                End If
+                                
+                                
+                                If semn = "minus" Then
+                        
+                                    If Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = accountMinus(0) Then
+                                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("M" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = "-" & Worksheets("Working Table Balanta").Range("A" & k).Value & "D"
+                                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("M" & k).Value
+                                    End If
+                                ElseIf Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = account(0) Then
+                                        sumVar = sumVar + Worksheets("Working Table Balanta").Range("M" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = Worksheets("Working Table Balanta").Range("A" & k).Value & "D"
+                                        valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("M" & k).Value
+                                End If
+                                
+                                        
+                                
+                            ElseIf InStr(currentAccount, "C") > 0 Then
+                                Debug.Print (CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value))
+                                
+                                account = Split(currentAccount, "*")
+                                                                
+                                wildCard = account(0) & "?"
+                                If InStr(account(0), "-") > 0 Then
+                                    accountMinus = Split(account(0), "-")
+                                    wildCard = accountMinus(1) & "?"
+                                    semn = "minus"
+                                Else:
+                                    semn = "plus"
+                                End If
+                                
+                                
+                                If semn = "minus" Then
+                        
+                                    If Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = accountMinus(1) Then
+                                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("N" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = "-" & Worksheets("Working Table Balanta").Range("A" & k).Value & "C"
+                                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("N" & k).Value
+                                    End If
+                                ElseIf Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = account(0) Then
+                                        sumVar = sumVar + Worksheets("Working Table Balanta").Range("N" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = Worksheets("Working Table Balanta").Range("A" & k).Value & "C"
+                                        valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("N" & k).Value
+                                End If
+                            
+                            Else:
+                            
+                                account = Split(currentAccount, "*")
+                                                                
+                                wildCard = account(0) & "?"
+                                If InStr(account(0), "-") > 0 Then
+                                    accountMinus = Split(account(0), "-")
+                                    wildCard = accountMinus(1) & "?"
+                                    semn = "minus"
+                                Else:
+                                    semn = "plus"
+                                End If
+                                
+                                
+                                If semn = "minus" Then
+                        
+                                    If Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = accountMinus(1) Then
+                                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("O" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = "-" & Worksheets("Working Table Balanta").Range("A" & k).Value
+                                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("O" & k).Value
+                                    End If
+                                ElseIf Worksheets("Working Table Balanta").Range("A" & k).Value Like wildCard Or Worksheets("Working Table Balanta").Range("A" & k).Value = account(0) Then
+                                        sumVar = sumVar + Worksheets("Working Table Balanta").Range("O" & k).Value
+                                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                                        conturi(UBound(conturi)) = Worksheets("Working Table Balanta").Range("A" & k).Value
+                                        valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("O" & k).Value
+                                End If
+                            
+                            End If
+
+                        End If
+                            
+                    End If
+                
+                    
+               ElseIf InStr(currentAccount, "-") > 0 Then
+                    account = Split(currentAccount, "-")
+                    If CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(account(1)) Then
+                        sumVar = sumVar - Worksheets("Working Table Balanta").Range("O" & k).Value
+                        ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                        ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                        conturi(UBound(conturi)) = "-" & Worksheets("Working Table Balanta").Range("A" & k).Value
+                        valori(UBound(valori)) = 0 - Worksheets("Working Table Balanta").Range("O" & k).Value
+                    End If
+                    
+                ElseIf CDbl(Worksheets("Working Table Balanta").Range("A" & k).Value) = CDbl(currentAccount) Then
+                   
+                    sumVar = sumVar + Worksheets("Working Table Balanta").Range("O" & k).Value
+                    ReDim Preserve conturi(LBound(conturi) To UBound(conturi) + 1)
+                    ReDim Preserve valori(LBound(valori) To UBound(valori) + 1)
+                    conturi(UBound(conturi)) = Worksheets("Working Table Balanta").Range("A" & k).Value
+                    valori(UBound(valori)) = Worksheets("Working Table Balanta").Range("O" & k).Value
+                End If
+              
+            Next k
+        
+        Next j
+        
+        Worksheets("Testeaza Formula").Activate
+        Worksheets("Testeaza Formula").Range("G2").Select
+        Cells(2, "G").Value = sumVar
+        
+    Loop While False
+    For i = 1 To UBound(conturi)
+            Worksheets("Testeaza Formula").Activate
+            Worksheets("Testeaza Formula").Range("G" & i + 2).Select
+            Cells(i + 2, "D").Value = conturi(i)
+            Cells(i + 2, "G").Value = valori(i)
+        Next i
+    
+End Sub
+
+
+
+
+
