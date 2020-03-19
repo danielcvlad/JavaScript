@@ -28,8 +28,12 @@ document
     const lastName = document.querySelector(".input-lastname").value;
     const email = document.querySelector(".input-email").value;
 
-    let value = ui.checkEmpty(name, lastName, email);
+    let value = ui.checkEmpty(name, lastname, email);
     console.log(value);
+    if (value) {
+    } else {
+      ui.showFeedback("some form values empty", "error");
+    }
   });
 //constructor function
 function UI() {}
@@ -62,4 +66,11 @@ UI.prototype.checkEmpty = function(name, lastname, email) {
     result = true;
   }
   return result;
+};
+UI.prototype.showFeedback = function(text, type) {
+  if (type === "success") {
+  } else if (type === "error") {
+    let feedback = document.querySelector(".drink-form__feedback");
+    feedback.classList.add("error");
+  }
 };
