@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Coffee Shop</title>
+    <!-- main css -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- font awesome -->
+    <script src="js/all.js"></script>
+  </head>
+
+  <body>
+    <!-- preloader -->
+    <div class="preloader">
+      <img
+        src="../setup/img/preloader.gif"
+        alt="pacman"
+        class="preloader__item"
+      />
+    </div>
+    <!-- end preloader -->
+    <!-- header -->
+    <header class="header" id="header">
+      <!-- banner  -->
+      <div class="banner">
+        <h1 class="banner__title bell-fonts">coffee junkie</h1>
+        <div class="banner__icons">
+          <a href="#" class="banner__social-icon">
+            <i class="fab fa-facebook fa-fw"></i>
+          </a>
+          <a href="#" class="banner__social-icon">
+            <i class="fab fa-twitter fa-fw"></i>
+          </a>
+          <a href="#" class="banner__social-icon">
+            <i class="fab fa-google-plus fa-fw"></i>
+          </a>
+          <a href="#" class="banner__social-icon">
+            <i class="fab fa-instagram fa-fw"></i>
+          </a>
+        </div>
+      </div>
+      <!-- end of banner  -->
+      <!-- video -->
+      <article class="video__container">
+        <video class="video__item" autoplay muted loop>
+          <source src="../setup/video/coffee.mp4" type="video/mp4" />
+          <source src="../setup/video/coffee.ogv" type="video/ogv" />
+          <source src="../setup/video/coffee.webm" type="video/webm" />
+          Your browser does not support video tag
+        </video>
+      </article>
+      <!-- end of video -->
+      <!-- nav btn -->
+      <div class="navBtn">
+        <i class="fas fa-bars"></i>
+      </div>
+      <!-- nav -->
+      <nav class="nav">
+        <ul class="nav__links">
+          <!-- logo -->
+          <li>
+            <a href="#" class="nav__single-link nav__logo">
+              <img src="img/navLogo.svg" alt="" />
+            </a>
+          </li>
+          <li>
+            <a href="#header" class="nav__single-link">home</a>
+          </li>
+          <li>
+            <a href="#about" class="nav__single-link">about</a>
+          </li>
+          <li>
+            <a href="#drink" class="nav__single-link">free dink</a>
+          </li>
+          <li>
+            <a href="#work" class="nav__single-link">work</a>
+          </li>
+          <li>
+            <a href="#contact" class="nav__single-link">contact</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- video switch -->
+      <div class="video__switch-container">
+        <div class="video__switch">
+          <span>on</span>
+          <span>off</span>
+          <div class="video__switch-btn"></div>
+        </div>
+      </div>
+    </header>
+    <!-- end of header -->
+
+    <!-- about -->
+
+    <section class="about section-padding" id="about">
+      <div class="grid-container grid-container--medium-2">
+        <!-- about container -->
+        <article class="about-container">
+          <!-- first child -->
+          <div class="section-title">
+            <h1 class="section-title__name bell-fonts">our story</h1>
+            <div class="section-title__underline"></div>
+            <p class="section-title__text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              nesciunt quisquam natus obcaecati soluta architecto doloremque
+              doloribus iusto? Tempora, nesciunt.
+            </p>
+          </div>
+          <!-- second child -->
+          <div class="about__img">
+            <img
+              src="../setup/img/aboutImg-1.jpeg"
+              class="about__img-item"
+              alt="about-img"
+            />
+          </div>
+        </article>
+        <!-- end of about container -->
+        <!-- about container -->
+        <article class="about-container">
+          <!-- first child -->
+          <div class="section-title">
+            <h1 class="section-title__name bell-fonts">what we do</h1>
+            <div class="section-title__underline"></div>
+            <p class="section-title__text">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis
+              deleniti possimus obcaecati a illo enim error deserunt dolore quo
+              adipisci?
+            </p>
+          </div>
+          <!-- second child -->
+          <div class="about__img about__img-special">
+            <img
+              src="../setup/img/aboutImg-2.jpeg"
+              class="about__img-item"
+              alt="about-img"
+            />
+          </div>
+        </article>
+        <!-- end of about container -->
+      </div>
+    </section>
+    <!-- end of about -->
+    <!-- drink section -->
+    <section class="drink section-padding" id="drink">
+      <div class="grid-container">
+        <!-- first item -->
+        <form class="drink-form">
+          <p class="drink-form__feedback">some text</p>
+          <h3 class="drink-form__title bell-fonts">to get a free drink</h3>
+          <div class="drink-form__input">
+            <input
+              type="text"
+              name=""
+              id=""
+              maxlength="15"
+              class="input-name"
+              placeholder="name"
+            />
+          </div>
+          <div class="drink-form__input">
+            <input
+              type="text"
+              name=""
+              id=""
+              maxlength="15"
+              class="input-lastname"
+              placeholder="last name"
+            />
+          </div>
+          <div class="drink-form__input">
+            <input
+              type="email"
+              name=""
+              id=""
+              maxlength="15"
+              class="input-email"
+              placeholder="email"
+            />
+          </div>
+          <input type="submit" value="sign up" class="input-submit" />
+        </form>
+        <!-- second item -->
+        <article class="drink-card">
+          <h3 class="drink-card__title bell-fonts">lucky people:</h3>
+          <div class="drink-card__list">
+            <div class="person">
+              <img
+                src="../setup/img/person-1.jpeg"
+                alt="person"
+                class="person__thumbnail"
+              />
+              <h4 class="person__name">marachie</h4>
+              <h4 class="person__lastname">felie</h4>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- end of drink section -->
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
